@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Menu, X, ChevronDown, User,
+  Menu, X, ChevronDown, ChevronRight, User,
   Building2, MapPin, Users, BarChart3, Home,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -83,6 +83,11 @@ export function Navbar() {
     setMobileOpen(false);
     setActiveMenu(null);
   }, [pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
 
   const navBg = isHomePage && !scrolled
     ? 'bg-transparent'
@@ -192,39 +197,163 @@ export function Navbar() {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="fixed top-20 left-0 right-0 z-40 bg-white border-b border-gray-100 shadow-2xl overflow-hidden"
-          >
-            <div className="container-premium py-6 space-y-1">
-              {NAV_ITEMS.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="flex items-center gap-3 px-4 py-3.5 rounded-xl hover:bg-purple-50 text-gray-800 font-semibold transition-colors"
-                >
-                  <item.icon className="w-5 h-5 text-purple-600" />
-                  {item.label}
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
+              onClick={() => setMobileOpen(false)}
+            />
+
+            {/* Drawer panel */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed top-0 right-0 bottom-0 z-50 w-full sm:w-[360px] bg-[#0d0b1a] flex flex-col lg:hidden overflow-y-auto"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between px-6 pt-6 pb-5 border-b border-white/8">
+                <Link href="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-2.5">
+                  <div className="relative w-9 h-9 flex-shrink-0">
+                    <Image src="/images/logo.webp" alt="4zee Properties" fill className="object-contain" />
+                  </div>
+                  <div>
+                    <div className="font-bold text-lg text-white leading-none">4zee</div>
+                    <div className="text-[10px] text-white/40 leading-none mt-0.5">Properties</div>
+                  </div>
                 </Link>
-              ))}
-              <div className="pt-4 border-t border-gray-100 flex gap-3">
-                <Link href="/auth/login" className="flex-1 py-3 px-4 rounded-xl border border-gray-200 text-center text-sm font-semibold text-gray-700 hover:border-purple-300">
+                <button
+                  onClick={() => setMobileOpen(false)}
+                  className="w-9 h-9 flex items-center justify-center rounded-xl bg-white/6 text-white/60 hover:bg-white/12 hover:text-white transition-all"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Nav items */}
+              <div className="flex-1 px-4 py-5 space-y-1">
+                {NAV_ITEMS.map((item, i) => (
+                  <MobileNavItem
+                    key={item.label}
+                    item={item}
+                    index={i}
+                    pathname={pathname}
+                    onClose={() => setMobileOpen(false)}
+                  />
+                ))}
+              </div>
+
+              {/* Footer CTAs */}
+              <div className="px-4 pb-8 pt-4 border-t border-white/8 space-y-3">
+                <Link
+                  href="/auth/login"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl border border-white/15 text-white/80 text-sm font-semibold hover:bg-white/6 hover:border-white/25 transition-all"
+                >
+                  <User className="w-4 h-4" />
                   Sign In
                 </Link>
-                <Link href="/list-property" className="flex-1 py-3 px-4 rounded-xl bg-purple-700 text-white text-center text-sm font-bold hover:bg-purple-600">
+                <Link
+                  href="/list-property"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center justify-center w-full py-3.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-sm font-bold transition-all shadow-lg shadow-purple-900/40"
+                >
                   List Property
                 </Link>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>
+  );
+}
+
+function MobileNavItem({
+  item,
+  index,
+  pathname,
+  onClose,
+}: {
+  item: (typeof NAV_ITEMS)[0];
+  index: number;
+  pathname: string;
+  onClose: () => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const isActive = pathname.startsWith(item.href) && item.href !== '/';
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: index * 0.05, duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {item.megaMenu ? (
+        <div>
+          <button
+            onClick={() => setOpen(!open)}
+            className={cn(
+              'w-full flex items-center gap-3.5 px-4 py-4 rounded-2xl text-left transition-all',
+              isActive ? 'bg-purple-600/20 text-purple-300' : 'text-white/80 hover:bg-white/6 hover:text-white'
+            )}
+          >
+            <div className={cn('w-9 h-9 flex items-center justify-center rounded-xl flex-shrink-0', isActive ? 'bg-purple-600/30' : 'bg-white/8')}>
+              <item.icon className={cn('w-4.5 h-4.5', isActive ? 'text-purple-400' : 'text-white/50')} />
+            </div>
+            <span className="flex-1 font-semibold text-base">{item.label}</span>
+            <ChevronRight className={cn('w-4 h-4 text-white/30 transition-transform duration-200', open && 'rotate-90')} />
+          </button>
+
+          <AnimatePresence>
+            {open && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.22, ease: 'easeInOut' }}
+                className="overflow-hidden"
+              >
+                <div className="ml-[52px] mt-1 mb-2 space-y-0.5 border-l border-white/8 pl-4">
+                  {item.megaMenu.map((sub) => (
+                    <Link
+                      key={sub.label}
+                      href={sub.href}
+                      onClick={onClose}
+                      className="flex flex-col py-2.5 px-2 rounded-xl hover:bg-white/5 transition-colors group"
+                    >
+                      <span className="text-sm font-semibold text-white/70 group-hover:text-white transition-colors">{sub.label}</span>
+                      <span className="text-xs text-white/30 mt-0.5">{sub.desc}</span>
+                    </Link>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      ) : (
+        <Link
+          href={item.href}
+          onClick={onClose}
+          className={cn(
+            'flex items-center gap-3.5 px-4 py-4 rounded-2xl transition-all',
+            isActive ? 'bg-purple-600/20 text-purple-300' : 'text-white/80 hover:bg-white/6 hover:text-white'
+          )}
+        >
+          <div className={cn('w-9 h-9 flex items-center justify-center rounded-xl flex-shrink-0', isActive ? 'bg-purple-600/30' : 'bg-white/8')}>
+            <item.icon className={cn('w-4.5 h-4.5', isActive ? 'text-purple-400' : 'text-white/50')} />
+          </div>
+          <span className="font-semibold text-base">{item.label}</span>
+        </Link>
+      )}
+    </motion.div>
   );
 }
