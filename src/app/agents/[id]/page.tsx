@@ -104,7 +104,7 @@ export default function AgentProfilePage({ params }: Props) {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/8 rounded-2xl overflow-hidden mt-10"
+              className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/8 rounded-2xl overflow-hidden mt-8 sm:mt-10"
             >
               {[
                 { icon: Building2, label: 'Active Listings', value: agent.listings },
@@ -112,29 +112,29 @@ export default function AgentProfilePage({ params }: Props) {
                 { icon: Star, label: 'Client Rating', value: agent.rating },
                 { icon: Award, label: 'Years Active', value: `${agent.experience}yr` },
               ].map((stat) => (
-                <div key={stat.label} className="bg-white/5 px-5 sm:px-6 py-5 sm:py-6">
-                  <stat.icon className="w-4 h-4 text-purple-400/70 mb-3" />
-                  <div className="text-2xl font-bold text-white mb-0.5">{stat.value}</div>
-                  <div className="text-white/35 text-xs">{stat.label}</div>
+                <div key={stat.label} className="bg-white/5 px-3 sm:px-6 py-4 sm:py-6">
+                  <stat.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-400/70 mb-2 sm:mb-3" />
+                  <div className="text-xl sm:text-2xl font-bold text-white mb-0.5">{stat.value}</div>
+                  <div className="text-white/35 text-[10px] sm:text-xs leading-snug">{stat.label}</div>
                 </div>
               ))}
             </motion.div>
 
             {/* Mobile contact bar */}
-            <div className="sm:hidden flex gap-2.5 mt-6">
+            <div className="sm:hidden flex gap-2 mt-5">
               <a href={`tel:${agent.phone}`}
-                className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl border border-white/15 text-white/70 font-semibold text-sm transition-all">
-                <Phone className="w-4 h-4" />
+                className="flex-1 flex items-center justify-center gap-1.5 py-3 rounded-xl border border-white/15 text-white/70 font-semibold text-xs sm:text-sm transition-all whitespace-nowrap">
+                <Phone className="w-3.5 h-3.5 flex-shrink-0" />
                 Call
               </a>
               <a href={`https://wa.me/${agent.whatsapp}`} target="_blank" rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-green-500 text-white font-semibold text-sm">
-                <WhatsAppIcon className="w-4 h-4" />
+                className="flex-1 flex items-center justify-center gap-1.5 py-3 rounded-xl bg-green-500 text-white font-semibold text-xs sm:text-sm whitespace-nowrap">
+                <WhatsAppIcon className="w-3.5 h-3.5 flex-shrink-0" />
                 WhatsApp
               </a>
               <a href={`mailto:${agent.email}`}
-                className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-purple-600 text-white font-semibold text-sm">
-                <Mail className="w-4 h-4" />
+                className="flex-1 flex items-center justify-center gap-1.5 py-3 rounded-xl bg-purple-600 text-white font-semibold text-xs sm:text-sm whitespace-nowrap">
+                <Mail className="w-3.5 h-3.5 flex-shrink-0" />
                 Email
               </a>
             </div>

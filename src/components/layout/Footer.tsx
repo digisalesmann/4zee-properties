@@ -77,7 +77,7 @@ const FOOTER_LINKS = {
     { label: 'All Markets', href: '/markets' },
   ],
   Company: [
-    { label: 'About 4zee', href: '/' },
+    { label: 'About 4zee', href: '/about' },
     { label: 'List Your Property', href: '/list-property' },
     { label: 'Find an Agent', href: '/agents' },
     { label: 'Contact Us', href: 'mailto:hello@4zee.properties' },
@@ -105,14 +105,14 @@ export function Footer() {
                 Weekly insights, exclusive listings, and market intelligence from across Africa.
               </p>
             </div>
-            <div className="flex gap-2 w-full lg:w-auto">
+            <div className="flex flex-col sm:flex-row gap-2 w-full lg:w-auto">
               <input
                 type="email"
                 placeholder="Your email address"
                 className="flex-1 lg:w-72 px-4 py-3 rounded-xl bg-white/8 border border-white/10 text-white placeholder-white/35 focus:outline-none focus:border-purple-500 text-sm transition-colors"
                 style={{ colorScheme: 'dark' }}
               />
-              <button className="px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold transition-colors text-sm whitespace-nowrap">
+              <button className="w-full sm:w-auto px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold transition-colors text-sm whitespace-nowrap">
                 Subscribe
               </button>
             </div>

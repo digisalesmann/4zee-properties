@@ -180,18 +180,18 @@ export default function ListPropertyPage() {
         <div className="container-premium">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-gray-100">
             {[
-              { icon: Eye,        color: 'text-purple-600 bg-purple-50', title: 'Maximum Visibility',  desc: '12M+ monthly buyers & investors' },
-              { icon: Users,      color: 'text-blue-600 bg-blue-50',     title: 'Verified Buyers',      desc: 'Pre-screened, serious buyers only' },
+              { icon: Eye,        color: 'text-purple-600 bg-purple-50',  title: 'Maximum Visibility', desc: '12M+ monthly buyers & investors' },
+              { icon: Users,      color: 'text-blue-600 bg-blue-50',      title: 'Verified Buyers',    desc: 'Pre-screened, serious buyers only' },
               { icon: TrendingUp, color: 'text-emerald-600 bg-emerald-50',title: 'Market Analytics',   desc: 'Real-time pricing for your area' },
-              { icon: BadgeCheck, color: 'text-amber-600 bg-amber-50',   title: 'Agent Support',        desc: 'Dedicated agent manages viewings' },
-            ].map((b, i) => (
-              <div key={b.title} className="flex items-start gap-3 p-4 lg:p-6 bg-white">
-                <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 ${b.color}`}>
-                  <b.icon className="w-4 h-4" />
+              { icon: BadgeCheck, color: 'text-amber-600 bg-amber-50',    title: 'Agent Support',      desc: 'Dedicated agent manages viewings' },
+            ].map((b) => (
+              <div key={b.title} className="flex items-center sm:items-start gap-2.5 sm:gap-3 p-3 sm:p-4 lg:p-6 bg-white">
+                <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center flex-shrink-0 ${b.color}`}>
+                  <b.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </div>
-                <div>
-                  <div className="font-bold text-gray-900 text-sm">{b.title}</div>
-                  <div className="text-gray-400 text-xs mt-0.5 leading-relaxed">{b.desc}</div>
+                <div className="min-w-0">
+                  <div className="font-bold text-gray-900 text-xs sm:text-sm leading-snug">{b.title}</div>
+                  <div className="text-gray-400 text-xs mt-0.5 leading-relaxed hidden sm:block">{b.desc}</div>
                 </div>
               </div>
             ))}
@@ -200,14 +200,14 @@ export default function ListPropertyPage() {
       </div>
 
       {/* ── Main content ── */}
-      <div className="container-premium py-8 lg:py-14">
+      <div className="container-premium py-10 lg:py-14">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
 
           {/* ══ FORM ══ */}
           <div className="lg:col-span-3">
 
             {/* Progress header */}
-            <div className="mb-8">
+            <div className="mb-8 pt-2">
               <div className="flex items-center mb-4">
                 {STEPS.map((s, i) => (
                   <div key={s.n} className="flex items-center flex-1 min-w-0">
@@ -274,13 +274,13 @@ export default function ListPropertyPage() {
                       {/* Property type */}
                       <div>
                         <label className={labelCls}>Property Type</label>
-                        <div className="grid grid-cols-4 sm:grid-cols-4 gap-2">
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                           {PROPERTY_TYPES.map(t => (
                             <button key={t.value} onClick={() => setPropType(t.value)}
-                              className={cn('flex flex-col items-center gap-1.5 p-2 sm:p-3 rounded-xl border text-center transition-all',
+                              className={cn('flex flex-col items-center gap-2 p-3 sm:p-3 rounded-xl border text-center transition-all',
                                 propType === t.value ? 'border-purple-500 bg-purple-50 text-purple-700' : 'border-gray-200 text-gray-500 hover:border-purple-200 hover:bg-gray-50')}>
-                              <t.icon className="w-4 h-4 flex-shrink-0" />
-                              <span className="text-[10px] sm:text-xs font-semibold leading-tight">{t.label}</span>
+                              <t.icon className="w-5 h-5 sm:w-4 sm:h-4 flex-shrink-0" />
+                              <span className="text-xs font-semibold leading-tight">{t.label}</span>
                             </button>
                           ))}
                         </div>
@@ -389,7 +389,7 @@ export default function ListPropertyPage() {
                         <label className={labelCls}>Description</label>
                         <textarea rows={5} value={desc} onChange={e => setDesc(e.target.value)}
                           className={cn(inputCls, 'resize-none')}
-                          placeholder="Describe the property in detail — key features, finishes, nearby landmarks, access roads, unique selling points..." />
+                          placeholder="Describe the property in detail, key features, finishes, nearby landmarks, access roads, unique selling points..." />
                         <p className="text-xs text-gray-400 mt-1.5">{desc.split(' ').filter(Boolean).length} words · Aim for at least 100 words.</p>
                       </div>
 
@@ -542,7 +542,7 @@ export default function ListPropertyPage() {
                 <h3 className="font-bold text-gray-900 text-sm">How It Works</h3>
               </div>
               {[
-                { n: '01', title: 'Submit Your Details', desc: 'Fill in property info and photos — takes about 5 minutes.' },
+                { n: '01', title: 'Submit Your Details', desc: 'Fill in property info and photos, takes about 5 minutes.' },
                 { n: '02', title: 'Our Team Verifies',   desc: 'We confirm ownership and create a premium listing.' },
                 { n: '03', title: 'Go Live in 48hrs',    desc: 'Reach 12M+ buyers across Africa and the diaspora.' },
               ].map((s, i) => (

@@ -152,7 +152,7 @@ export const FEATURED_PROPERTIES: Property[] = [
   {
     id: 'prop-006',
     title: 'Cairo Smart City Apartment, New Administrative Capital',
-    description: 'Premium smart city apartments in Egypt\'s new capital — an urban marvel of modern architecture. Eco-friendly, connected, and investment-grade.',
+    description: 'Premium smart city apartments in Egypt\'s new capital, an urban marvel of modern architecture. Eco-friendly, connected, and investment-grade.',
     type: 'apartment',
     status: 'off-plan',
     price: 320000,
@@ -223,7 +223,7 @@ export const TESTIMONIALS: Testimonial[] = [
     company: 'Nairobi, Kenya',
     avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80',
     rating: 5,
-    text: 'The virtual tour feature alone saved me three weeks of physical visits. I purchased my Westlands penthouse entirely through 4zee\'s platform — from initial search to final paperwork. Exceptional experience.',
+    text: 'The virtual tour feature alone saved me three weeks of physical visits. I purchased my Westlands penthouse entirely through 4zee\'s platform, from initial search to final paperwork. Exceptional experience.',
     country: 'Kenya',
     propertyType: 'Penthouse',
   },

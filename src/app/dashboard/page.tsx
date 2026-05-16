@@ -3,8 +3,9 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-  Home, Heart, Bell, Settings, Building2, MessageSquare,
+  Home, Bell, Settings, Building2, MessageSquare,
   TrendingUp, Calendar, ChevronRight, MapPin, Eye, BarChart3,
+  BookmarkCheck, Inbox, CalendarCheck, Gem,
   LogOut, Plus, ArrowUpRight, BrainCircuit, CreditCard,
   BadgeCheck, Menu, X, Search, ChevronLeft, ExternalLink,
   ArrowUp, ArrowDown, Star, Clock, Edit2, Trash2, CheckCircle2,
@@ -20,7 +21,7 @@ import { formatCurrency } from '@/lib/utils';
 const NAV_ITEMS = [
   { icon: Home,          label: 'Overview',         value: 'overview' },
   { icon: Building2,     label: 'My Listings',      value: 'listings' },
-  { icon: Heart,         label: 'Saved Properties', value: 'saved' },
+  { icon: BookmarkCheck, label: 'Saved Properties', value: 'saved' },
   { icon: MessageSquare, label: 'Inquiries',         value: 'inquiries',    badge: 3 },
   { icon: Calendar,      label: 'Bookings',          value: 'bookings' },
   { icon: BarChart3,     label: 'Analytics',         value: 'analytics' },
@@ -74,13 +75,13 @@ const TOP_LISTINGS = [
 ];
 
 const PAYMENTS = [
-  { id: 'TXN-001', description: 'Premium Listing Fee — The Pinnacle Penthouse', amount: 150, currency: 'USD', date: 'Dec 15, 2024', status: 'paid',    type: 'listing' },
-  { id: 'TXN-002', description: 'Premium Listing Fee — Nairobi Sky Residence',  amount: 150, currency: 'USD', date: 'Dec 10, 2024', status: 'paid',    type: 'listing' },
-  { id: 'TXN-003', description: 'Featured Placement — Sandton Crown Estate',    amount: 80,  currency: 'USD', date: 'Dec 5, 2024',  status: 'paid',    type: 'boost' },
-  { id: 'TXN-004', description: 'Premium Listing Fee — Cairo Marina Tower',     amount: 150, currency: 'USD', date: 'Nov 28, 2024', status: 'pending', type: 'listing' },
-  { id: 'TXN-005', description: 'Analytics Pro — Monthly Subscription',         amount: 29,  currency: 'USD', date: 'Nov 20, 2024', status: 'paid',    type: 'subscription' },
-  { id: 'TXN-006', description: 'Featured Placement — The Pinnacle Penthouse',  amount: 80,  currency: 'USD', date: 'Nov 12, 2024', status: 'failed',  type: 'boost' },
-  { id: 'TXN-007', description: 'Premium Listing Fee — Accra Business Hub',     amount: 150, currency: 'USD', date: 'Nov 5, 2024',  status: 'paid',    type: 'listing' },
+  { id: 'TXN-001', description: 'Premium Listing Fee. The Pinnacle Penthouse', amount: 150, currency: 'USD', date: 'Dec 15, 2024', status: 'paid',    type: 'listing' },
+  { id: 'TXN-002', description: 'Premium Listing Fee. Nairobi Sky Residence',  amount: 150, currency: 'USD', date: 'Dec 10, 2024', status: 'paid',    type: 'listing' },
+  { id: 'TXN-003', description: 'Featured Placement. Sandton Crown Estate',    amount: 80,  currency: 'USD', date: 'Dec 5, 2024',  status: 'paid',    type: 'boost' },
+  { id: 'TXN-004', description: 'Premium Listing Fee. Cairo Marina Tower',     amount: 150, currency: 'USD', date: 'Nov 28, 2024', status: 'pending', type: 'listing' },
+  { id: 'TXN-005', description: 'Analytics Pro. Monthly Subscription',         amount: 29,  currency: 'USD', date: 'Nov 20, 2024', status: 'paid',    type: 'subscription' },
+  { id: 'TXN-006', description: 'Featured Placement. The Pinnacle Penthouse',  amount: 80,  currency: 'USD', date: 'Nov 12, 2024', status: 'failed',  type: 'boost' },
+  { id: 'TXN-007', description: 'Premium Listing Fee. Accra Business Hub',     amount: 150, currency: 'USD', date: 'Nov 5, 2024',  status: 'paid',    type: 'listing' },
 ];
 
 const ALL_NOTIFICATIONS = [
@@ -103,10 +104,10 @@ const ACTIVITY = [
 ];
 
 const STATS = [
-  { label: 'Saved Properties', value: '23',   delta: '+4',   up: true,  icon: Heart,         color: 'text-rose-500',    bg: 'bg-rose-50',    sub: 'this week' },
-  { label: 'Active Inquiries', value: '8',    delta: '3',    up: false, icon: MessageSquare, color: 'text-blue-600',    bg: 'bg-blue-50',    sub: 'need reply' },
-  { label: 'Viewings Booked',  value: '3',    delta: '+1',   up: true,  icon: Calendar,      color: 'text-emerald-600', bg: 'bg-emerald-50', sub: 'this month' },
-  { label: 'Portfolio Value',  value: '$2.8M',delta: '+12%', up: true,  icon: TrendingUp,    color: 'text-purple-600',  bg: 'bg-purple-50',  sub: 'YTD growth' },
+  { label: 'Saved Properties', value: '23',   delta: '+4',   up: true,  icon: BookmarkCheck, color: 'text-rose-500',    bg: 'bg-rose-50',    sub: 'this week' },
+  { label: 'Active Inquiries', value: '8',    delta: '3',    up: false, icon: Inbox,         color: 'text-blue-600',    bg: 'bg-blue-50',    sub: 'need reply' },
+  { label: 'Viewings Booked',  value: '3',    delta: '+1',   up: true,  icon: CalendarCheck, color: 'text-emerald-600', bg: 'bg-emerald-50', sub: 'this month' },
+  { label: 'Portfolio Value',  value: '$2.8M',delta: '+12%', up: true,  icon: Gem,           color: 'text-purple-600',  bg: 'bg-purple-50',  sub: 'YTD growth' },
 ];
 
 /* ─── Style maps ─── */
@@ -213,7 +214,7 @@ export default function DashboardPage() {
           </div>
         )}
 
-        <nav className="flex-1 overflow-y-auto px-3 py-3 space-y-0.5">
+        <nav className="flex-1 overflow-y-auto scrollbar-hide px-3 py-3 space-y-0.5">
           {NAV_ITEMS.map(item => {
             const active = activeTab === item.value;
             return (
@@ -277,7 +278,7 @@ export default function DashboardPage() {
         </header>
 
         {/* Scrollable content */}
-        <main className="flex-1 overflow-y-auto">
+        <main className="flex-1 overflow-y-auto scrollbar-hide">
           <div className="p-4 lg:p-7 mx-auto max-w-[1400px]">
 
             {/* ════ OVERVIEW ════ */}
@@ -392,13 +393,13 @@ export default function DashboardPage() {
 
                 <div className="rounded-2xl bg-gradient-to-r from-purple-700 to-purple-900 text-white relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl pointer-events-none" />
-                  <div className="relative flex items-center justify-between gap-6 px-6 py-5">
+                  <div className="relative flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-6 py-5">
                     <div>
                       <div className="flex items-center gap-1.5 mb-1.5"><BrainCircuit className="w-4 h-4 text-amber-400" /><span className="font-bold text-amber-400 text-xs uppercase tracking-wider">AI-Powered</span></div>
                       <h3 className="font-display text-xl font-bold mb-1">3 New Properties Match Your Profile</h3>
                       <p className="text-white/60 text-sm">Lagos and Accra listings based on your search history.</p>
                     </div>
-                    <Link href="/properties" className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-purple-900 font-bold text-sm hover:bg-purple-50 transition-colors">
+                    <Link href="/properties" className="self-start sm:self-auto flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-purple-900 font-bold text-sm hover:bg-purple-50 transition-colors">
                       View Matches <ArrowUpRight className="w-4 h-4" />
                     </Link>
                   </div>
@@ -433,8 +434,8 @@ export default function DashboardPage() {
                   {filteredList.map((p, i) => (
                     <motion.div key={p.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }}
                       className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:border-purple-100 hover:shadow-md transition-all">
-                      <div className="flex gap-4 p-4">
-                        <div className="relative w-28 h-24 rounded-xl overflow-hidden flex-shrink-0">
+                      <div className="flex gap-3 p-4">
+                        <div className="relative w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden flex-shrink-0">
                           <Image src={p.images[0]} alt={p.title} fill className="object-cover" />
                         </div>
                         <div className="flex-1 min-w-0">
@@ -442,14 +443,14 @@ export default function DashboardPage() {
                             <h3 className="font-bold text-gray-900 text-sm line-clamp-1">{p.title}</h3>
                             <span className={`text-xs px-2 py-0.5 rounded-full font-semibold flex-shrink-0 capitalize ${LISTING_STATUS[p.listingStatus]}`}>{p.listingStatus}</span>
                           </div>
-                          <div className="flex items-center gap-1 text-xs text-gray-500 mb-2">
-                            <MapPin className="w-3 h-3 text-purple-400" />{p.location.city}, {p.location.country}
+                          <div className="flex items-center gap-1 text-xs text-gray-500 mb-1.5 line-clamp-1">
+                            <MapPin className="w-3 h-3 text-purple-400 flex-shrink-0" />{p.location.city}, {p.location.country}
                           </div>
-                          <div className="font-bold text-purple-700 text-sm mb-3">{formatCurrency(p.price, p.currency)}</div>
-                          <div className="flex items-center gap-3 text-xs text-gray-500">
-                            <span className="flex items-center gap-1"><Eye className="w-3 h-3" />{p.listingViews.toLocaleString()} views</span>
-                            <span className="flex items-center gap-1"><MessageSquare className="w-3 h-3" />{p.listingInquiries} inquiries</span>
-                            <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{p.daysListed}d listed</span>
+                          <div className="font-bold text-purple-700 text-sm mb-2">{formatCurrency(p.price, p.currency)}</div>
+                          <div className="flex items-center flex-wrap gap-x-3 gap-y-1 text-xs text-gray-400">
+                            <span className="flex items-center gap-1"><Eye className="w-3 h-3" />{p.listingViews.toLocaleString()}</span>
+                            <span className="flex items-center gap-1"><MessageSquare className="w-3 h-3" />{p.listingInquiries}</span>
+                            <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{p.daysListed}d</span>
                           </div>
                         </div>
                       </div>
@@ -596,9 +597,10 @@ export default function DashboardPage() {
                     const s = BOOKING_STATUS[b.status];
                     return (
                       <motion.div key={b.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}
-                        className="bg-white rounded-2xl border border-gray-100 hover:border-purple-100 hover:shadow-sm transition-all">
-                        <div className="flex items-center gap-4 p-5">
-                          <div className="relative w-16 h-14 rounded-xl overflow-hidden flex-shrink-0">
+                        className="bg-white rounded-2xl border border-gray-100 hover:border-purple-100 hover:shadow-sm transition-all overflow-hidden">
+                        {/* Top row: image + title + badge */}
+                        <div className="flex items-center gap-3 p-4 pb-3">
+                          <div className="relative w-14 h-12 rounded-xl overflow-hidden flex-shrink-0">
                             <Image src={b.propImg} alt={b.property} fill className="object-cover" unoptimized />
                           </div>
                           <div className="flex-1 min-w-0">
@@ -607,22 +609,25 @@ export default function DashboardPage() {
                               <span className={`text-xs px-2 py-0.5 rounded-full font-semibold flex-shrink-0 capitalize ${s.badge}`}>{b.status}</span>
                             </div>
                             <div className="flex items-center gap-3 text-xs text-gray-500 flex-wrap">
-                              <span className="flex items-center gap-1"><Calendar className="w-3 h-3 text-purple-400" />{b.date} &middot; {b.time}</span>
+                              <span className="flex items-center gap-1"><Calendar className="w-3 h-3 text-purple-400" />{b.date} · {b.time}</span>
                               <span className="flex items-center gap-1"><Eye className="w-3 h-3 text-blue-400" />{b.type}</span>
                             </div>
                           </div>
-                          <div className="flex items-center gap-3 flex-shrink-0">
-                            <div className="flex items-center gap-2">
-                              <div className="relative w-7 h-7 rounded-lg overflow-hidden">
-                                <Image src={b.clientAvatar} alt={b.client} fill className="object-cover" unoptimized />
-                              </div>
-                              <span className="text-xs font-medium text-gray-700 hidden sm:block">{b.client}</span>
+                        </div>
+                        {/* Bottom row: client + actions */}
+                        <div className="flex items-center justify-between gap-3 px-4 py-3 border-t border-gray-50">
+                          <div className="flex items-center gap-2">
+                            <div className="relative w-6 h-6 rounded-lg overflow-hidden flex-shrink-0">
+                              <Image src={b.clientAvatar} alt={b.client} fill className="object-cover" unoptimized />
                             </div>
+                            <span className="text-xs font-medium text-gray-600">{b.client}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
                             {b.status === 'pending' && (
-                              <div className="flex gap-2">
+                              <>
                                 <button className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition-colors">Confirm</button>
                                 <button className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-50 text-red-600 hover:bg-red-100 transition-colors">Decline</button>
-                              </div>
+                              </>
                             )}
                             {b.status === 'confirmed' && (
                               <button className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-purple-50 text-purple-700 hover:bg-purple-100 transition-colors flex items-center gap-1">
@@ -717,7 +722,7 @@ export default function DashboardPage() {
                   <div className="px-6 py-4 border-b border-gray-100">
                     <h3 className="font-bold text-gray-900">Top Performing Listings</h3>
                   </div>
-                  <div className="overflow-x-auto">
+                  <div className="overflow-x-auto scrollbar-hide">
                     <table className="w-full">
                       <thead>
                         <tr className="border-b border-gray-50">
@@ -815,7 +820,7 @@ export default function DashboardPage() {
                     <h3 className="font-bold text-gray-900">Transaction History</h3>
                     <Activity className="w-4 h-4 text-gray-400" />
                   </div>
-                  <div className="overflow-x-auto">
+                  <div className="overflow-x-auto scrollbar-hide">
                     <table className="w-full">
                       <thead>
                         <tr className="border-b border-gray-50">
@@ -968,7 +973,7 @@ export default function DashboardPage() {
 
                 <div className="bg-white rounded-2xl border border-gray-100 p-6">
                   <h2 className="font-bold text-gray-900 mb-1">Danger Zone</h2>
-                  <p className="text-xs text-gray-400 mb-5">Irreversible actions — proceed with care.</p>
+                  <p className="text-xs text-gray-400 mb-5">Irreversible actions, proceed with care.</p>
                   <div className="flex items-center justify-between p-4 rounded-xl border border-red-100 bg-red-50/50">
                     <div>
                       <div className="text-sm font-semibold text-red-700">Delete Account</div>

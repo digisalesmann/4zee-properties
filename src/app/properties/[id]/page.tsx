@@ -111,9 +111,9 @@ export default function PropertyDetailPage({ params }: Props) {
           {/* Left/Main content */}
           <div className="xl:col-span-2 space-y-8">
             {/* Image gallery */}
-            <div className="rounded-3xl overflow-hidden bg-gray-100">
+            <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-gray-100">
               {/* Main image */}
-              <div className="relative h-[480px] group cursor-pointer" onClick={() => setLightbox(true)}>
+              <div className="relative h-64 sm:h-[420px] lg:h-[480px] group cursor-pointer" onClick={() => setLightbox(true)}>
                 <AnimatePresence mode="sync">
                   <motion.div
                     key={activeImage}
@@ -129,22 +129,22 @@ export default function PropertyDetailPage({ params }: Props) {
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
 
-                {/* Gallery arrows */}
+                {/* Gallery arrows — always visible on mobile, hover-only on desktop */}
                 {property.images.length > 1 && (
                   <>
                     <button onClick={(e) => { e.stopPropagation(); setActiveImage(i => (i - 1 + property.images.length) % property.images.length); }}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 p-3 glass rounded-xl opacity-0 group-hover:opacity-100 transition-all hover:bg-white/30">
-                      <ChevronLeft className="w-5 h-5 text-white" />
+                      className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 p-2 sm:p-3 glass rounded-xl sm:opacity-0 sm:group-hover:opacity-100 transition-all hover:bg-white/30">
+                      <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                     </button>
                     <button onClick={(e) => { e.stopPropagation(); setActiveImage(i => (i + 1) % property.images.length); }}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 p-3 glass rounded-xl opacity-0 group-hover:opacity-100 transition-all hover:bg-white/30">
-                      <ChevronRight className="w-5 h-5 text-white" />
+                      className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 p-2 sm:p-3 glass rounded-xl sm:opacity-0 sm:group-hover:opacity-100 transition-all hover:bg-white/30">
+                      <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                     </button>
                   </>
                 )}
 
                 {/* Badges */}
-                <div className="absolute top-5 left-5 flex gap-2 flex-wrap">
+                <div className="absolute top-3 sm:top-5 left-3 sm:left-5 flex gap-1.5 sm:gap-2 flex-wrap">
                   <Badge variant={STATUS_COLORS[property.status] || 'purple'}>
                     {property.status.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
                   </Badge>
@@ -153,31 +153,30 @@ export default function PropertyDetailPage({ params }: Props) {
                 </div>
 
                 {/* View count */}
-                <div className="absolute top-5 right-5 flex items-center gap-1.5 glass px-3 py-1.5 rounded-full text-white text-sm">
-                  <Eye className="w-4 h-4" />
-                  {property.views.toLocaleString()} views
+                <div className="absolute top-3 sm:top-5 right-3 sm:right-5 flex items-center gap-1 sm:gap-1.5 glass px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-white text-xs sm:text-sm">
+                  <Eye className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  <span className="hidden sm:inline">{property.views.toLocaleString()} views</span>
+                  <span className="sm:hidden">{property.views.toLocaleString()}</span>
                 </div>
 
-                {/* Virtual Tour button */}
-                <div className="absolute bottom-5 left-5">
-                  <button className="flex items-center gap-2 glass px-4 py-2.5 rounded-xl text-white font-semibold text-sm hover:bg-white/20 transition-colors">
-                    <Play className="w-4 h-4 fill-current" />
+                {/* Virtual Tour + counter */}
+                <div className="absolute bottom-3 sm:bottom-5 left-3 sm:left-5 right-3 sm:right-5 flex items-center justify-between">
+                  <button className="flex items-center gap-1.5 sm:gap-2 glass px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-white font-semibold text-xs sm:text-sm hover:bg-white/20 transition-colors">
+                    <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" />
                     Virtual Tour
                   </button>
-                </div>
-
-                {/* Image counter */}
-                <div className="absolute bottom-5 right-5 glass px-3 py-1.5 rounded-full text-white text-sm">
-                  {activeImage + 1} / {property.images.length}
+                  <div className="glass px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-white text-xs sm:text-sm">
+                    {activeImage + 1} / {property.images.length}
+                  </div>
                 </div>
               </div>
 
               {/* Thumbnail strip */}
               {property.images.length > 1 && (
-                <div className="flex gap-2 p-3 bg-gray-50">
+                <div className="flex gap-1.5 sm:gap-2 p-2 sm:p-3 bg-gray-50 overflow-x-auto scrollbar-hide">
                   {property.images.map((img, i) => (
                     <button key={i} onClick={() => setActiveImage(i)}
-                      className={`relative w-24 h-16 rounded-xl overflow-hidden flex-shrink-0 transition-all ${i === activeImage ? 'ring-2 ring-purple-600 ring-offset-1' : 'opacity-60 hover:opacity-100'}`}>
+                      className={`relative w-16 h-12 sm:w-24 sm:h-16 rounded-lg sm:rounded-xl overflow-hidden flex-shrink-0 transition-all ${i === activeImage ? 'ring-2 ring-purple-600 ring-offset-1' : 'opacity-60 hover:opacity-100'}`}>
                       <Image src={img} alt="" fill className="object-cover" />
                     </button>
                   ))}
@@ -186,50 +185,52 @@ export default function PropertyDetailPage({ params }: Props) {
             </div>
 
             {/* Property header */}
-            <div className="bg-white rounded-2xl p-8 border border-gray-100">
-              <div className="flex items-start justify-between gap-4 mb-4">
-                <div>
-                  <h1 className="font-display text-3xl font-bold text-gray-900 mb-3">{property.title}</h1>
-                  <div className="flex items-center gap-2 text-gray-500">
-                    <MapPin className="w-4 h-4 text-purple-500" />
-                    <span>{property.location.address}, {property.location.city}, {property.location.country}</span>
+            <div className="bg-white rounded-2xl p-4 sm:p-6 md:p-8 border border-gray-100">
+              <div className="flex items-start justify-between gap-3 mb-4">
+                <div className="min-w-0">
+                  <h1 className="font-display text-xl sm:text-3xl font-bold text-gray-900 mb-2 leading-snug">{property.title}</h1>
+                  <div className="flex items-start gap-1.5 text-gray-500 text-sm">
+                    <MapPin className="w-3.5 h-3.5 text-purple-500 flex-shrink-0 mt-0.5" />
+                    <span className="leading-snug">{property.location.address}, {property.location.city}, {property.location.country}</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 flex-shrink-0">
+                <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
                   <button onClick={() => setSaved(!saved)}
-                    className={`p-3 rounded-xl border transition-all ${saved ? 'border-red-200 bg-red-50 text-red-500' : 'border-gray-200 text-gray-500 hover:border-purple-200 hover:text-purple-600'}`}>
-                    <Heart className={`w-5 h-5 ${saved ? 'fill-current' : ''}`} />
+                    className={`p-2 sm:p-3 rounded-xl border transition-all ${saved ? 'border-red-200 bg-red-50 text-red-500' : 'border-gray-200 text-gray-500 hover:border-purple-200 hover:text-purple-600'}`}>
+                    <Heart className={`w-4 h-4 sm:w-5 sm:h-5 ${saved ? 'fill-current' : ''}`} />
                   </button>
-                  <button className="p-3 rounded-xl border border-gray-200 text-gray-500 hover:border-purple-200 hover:text-purple-600 transition-all">
-                    <Share2 className="w-5 h-5" />
+                  <button className="p-2 sm:p-3 rounded-xl border border-gray-200 text-gray-500 hover:border-purple-200 hover:text-purple-600 transition-all">
+                    <Share2 className="w-4 h-4 sm:w-5 sm:h-5" />
                   </button>
                 </div>
               </div>
 
               {/* Price */}
-              <div className="flex items-end gap-3 mb-6 pb-6 border-b border-gray-100">
-                <div className="text-4xl font-bold text-purple-700">{formatCurrency(property.price, property.currency)}</div>
-                {property.status === 'for-rent' && <div className="text-gray-500 text-lg mb-1">/ month</div>}
-                <div className="ml-auto text-sm text-gray-400 text-right">
-                  <div className="font-semibold text-gray-600">{formatCurrency(Math.round(property.price / property.size), 'USD')} / {property.sizeUnit}</div>
+              <div className="flex flex-col sm:flex-row sm:items-end sm:gap-3 gap-1 mb-5 pb-5 border-b border-gray-100">
+                <div className="flex items-end gap-2 flex-wrap">
+                  <div className="text-2xl sm:text-4xl font-bold text-purple-700">{formatCurrency(property.price, property.currency)}</div>
+                  {property.status === 'for-rent' && <div className="text-gray-500 text-sm sm:text-lg mb-0.5">/ month</div>}
+                </div>
+                <div className="sm:ml-auto text-xs sm:text-sm text-gray-400 sm:text-right">
+                  <div className="font-semibold text-gray-600 whitespace-nowrap">{formatCurrency(Math.round(property.price / property.size), 'USD')} / {property.sizeUnit}</div>
                   <div>Price per unit</div>
                 </div>
               </div>
 
               {/* Key specs */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
                 {[
                   { icon: Bed, label: 'Bedrooms', value: property.bedrooms || 'N/A' },
                   { icon: Bath, label: 'Bathrooms', value: property.bathrooms || 'N/A' },
                   { icon: Maximize, label: 'Area', value: `${property.size} ${property.sizeUnit}` },
                   { icon: Car, label: 'Parking', value: property.parking || 'N/A' },
                 ].map((spec) => (
-                  <div key={spec.label} className="flex items-center gap-3 p-4 rounded-xl bg-gray-50 border border-gray-100">
-                    <div className="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center flex-shrink-0">
-                      <spec.icon className="w-5 h-5 text-purple-600" />
+                  <div key={spec.label} className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-xl bg-gray-50 border border-gray-100">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-purple-50 flex items-center justify-center flex-shrink-0">
+                      <spec.icon className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" />
                     </div>
-                    <div>
-                      <div className="font-bold text-gray-900 text-sm">{spec.value}</div>
+                    <div className="min-w-0">
+                      <div className="font-bold text-gray-900 text-sm truncate">{spec.value}</div>
                       <div className="text-xs text-gray-500">{spec.label}</div>
                     </div>
                   </div>
@@ -239,10 +240,10 @@ export default function PropertyDetailPage({ params }: Props) {
 
             {/* Tabs */}
             <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
-              <div className="flex border-b border-gray-100">
+              <div className="flex border-b border-gray-100 overflow-x-auto scrollbar-hide">
                 {['overview', 'amenities', 'location', 'details'].map((tab) => (
                   <button key={tab} onClick={() => setActiveTab(tab)}
-                    className={`flex-1 py-4 text-sm font-semibold capitalize transition-all ${
+                    className={`flex-1 min-w-[80px] py-3.5 sm:py-4 text-xs sm:text-sm font-semibold capitalize transition-all whitespace-nowrap px-2 ${
                       activeTab === tab ? 'text-purple-700 border-b-2 border-purple-600 bg-purple-50/50' : 'text-gray-500 hover:text-gray-800'
                     }`}>
                     {tab}
@@ -250,7 +251,7 @@ export default function PropertyDetailPage({ params }: Props) {
                 ))}
               </div>
 
-              <div className="p-8">
+              <div className="p-4 sm:p-6 md:p-8">
                 {activeTab === 'overview' && (
                   <div>
                     <h3 className="font-bold text-gray-900 text-xl mb-4">About This Property</h3>
@@ -273,12 +274,12 @@ export default function PropertyDetailPage({ params }: Props) {
 
                 {activeTab === 'amenities' && (
                   <div>
-                    <h3 className="font-bold text-gray-900 text-xl mb-6">Property Amenities</h3>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                    <h3 className="font-bold text-gray-900 text-xl mb-5">Property Amenities</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
                       {property.amenities.map((amenity) => (
-                        <div key={amenity} className="flex items-center gap-2.5 p-3 rounded-xl bg-green-50 border border-green-100">
+                        <div key={amenity} className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-green-50 border border-green-100">
                           <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
-                          <span className="text-sm font-medium text-gray-700">{amenity}</span>
+                          <span className="text-sm font-medium text-gray-700 leading-snug">{amenity}</span>
                         </div>
                       ))}
                     </div>
@@ -301,7 +302,7 @@ export default function PropertyDetailPage({ params }: Props) {
                       </div>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                      {['Airport — 25 min', 'CBD — 8 min', 'Schools — 5 min'].map(loc => (
+                      {['Airport → 25 min', 'CBD → 8 min', 'Schools → 5 min'].map(loc => (
                         <div key={loc} className="p-3 rounded-xl bg-gray-50 border border-gray-100 text-sm text-center font-medium text-gray-600">{loc}</div>
                       ))}
                     </div>
@@ -310,8 +311,8 @@ export default function PropertyDetailPage({ params }: Props) {
 
                 {activeTab === 'details' && (
                   <div>
-                    <h3 className="font-bold text-gray-900 text-xl mb-6">Property Details</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                    <h3 className="font-bold text-gray-900 text-xl mb-5">Property Details</h3>
+                    <div className="text-sm divide-y divide-gray-100">
                       {[
                         { label: 'Listing ID', value: property.id },
                         { label: 'Property Type', value: property.type },
@@ -322,13 +323,21 @@ export default function PropertyDetailPage({ params }: Props) {
                         { label: 'Parking', value: property.parking || 'N/A' },
                         { label: 'Year Built', value: property.yearBuilt || 'N/A' },
                         { label: 'Floors', value: property.floors || 'N/A' },
-                        { label: 'Tags', value: property.tags.join(', ') },
                       ].map(item => (
-                        <div key={item.label} className="flex justify-between py-3 border-b border-gray-100">
-                          <span className="text-gray-500">{item.label}</span>
-                          <span className="font-semibold text-gray-800 capitalize">{item.value}</span>
+                        <div key={item.label} className="flex items-center justify-between gap-4 py-3">
+                          <span className="text-gray-500 flex-shrink-0">{item.label}</span>
+                          <span className="font-semibold text-gray-800 capitalize text-right">{item.value}</span>
                         </div>
                       ))}
+                      {/* Tags — full width since value can be long */}
+                      <div className="py-3">
+                        <span className="text-gray-500 block mb-1.5">Tags</span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {property.tags.map(tag => (
+                            <span key={tag} className="px-2.5 py-1 rounded-full bg-purple-50 border border-purple-100 text-purple-700 text-xs font-semibold">{tag}</span>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 )}

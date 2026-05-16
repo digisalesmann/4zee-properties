@@ -76,7 +76,7 @@ export function StatsSection() {
               <span className="gradient-text">PropTech Platform</span>
             </h2>
             <p className="text-white/50 text-lg leading-relaxed mb-10 max-w-md">
-              From first-time buyers to institutional investors — 4zee Properties powers real estate across the continent with verified data and the widest agent network.
+              From first-time buyers to institutional investors. 4zee Properties powers real estate across the continent with verified data and the widest agent network.
             </p>
             <Link
               href="/properties"

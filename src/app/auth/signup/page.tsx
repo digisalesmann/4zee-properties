@@ -123,7 +123,7 @@ export default function SignupPage() {
           className="w-full max-w-md"
         >
           <h2 className="font-display text-3xl font-bold text-white mb-2">Create your account</h2>
-          <p className="text-white/45 text-sm mb-8">Get started for free — no credit card required</p>
+          <p className="text-white/45 text-sm mb-8">Get started for free, no credit card required</p>
 
           {/* Social */}
           <button className="w-full flex items-center justify-center gap-3 py-3 rounded-xl bg-white/5 border border-white/10 text-white/80 text-sm font-semibold hover:bg-white/10 hover:border-white/20 transition-all mb-6">

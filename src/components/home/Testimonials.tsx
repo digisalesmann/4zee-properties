@@ -12,7 +12,7 @@ export function Testimonials() {
   const next = () => setCurrent((c) => (c + 1) % TESTIMONIALS.length);
 
   return (
-    <section className="py-24 bg-[#0d0b1a] relative overflow-hidden">
+    <section className="py-16 sm:py-24 bg-[#0d0b1a] relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-900/20 rounded-full blur-3xl" />
@@ -71,49 +71,49 @@ export function Testimonials() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.96, y: -20 }}
                 transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                className="relative glass-dark rounded-3xl p-10 border border-white/10 shadow-2xl"
+                className="relative glass-dark rounded-3xl p-6 sm:p-8 md:p-10 border border-white/10 shadow-2xl"
               >
                 {/* Quote icon */}
-                <div className="absolute -top-4 -left-4 w-10 h-10 rounded-xl bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-900/50">
-                  <Quote className="w-5 h-5 text-white fill-current" />
+                <div className="absolute -top-4 -left-4 w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-900/50">
+                  <Quote className="w-4 h-4 sm:w-5 sm:h-5 text-white fill-current" />
                 </div>
 
                 {/* Stars */}
-                <div className="flex gap-1 mb-6">
+                <div className="flex gap-1 mb-4 sm:mb-6">
                   {[...Array(TESTIMONIALS[current].rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+                    <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
 
                 {/* Text */}
-                <blockquote className="text-white text-xl leading-relaxed font-light mb-8">
+                <blockquote className="text-white text-base sm:text-lg md:text-xl leading-relaxed font-light mb-6 sm:mb-8">
                   &ldquo;{TESTIMONIALS[current].text}&rdquo;
                 </blockquote>
 
                 {/* Author */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <div className="flex items-center gap-3 sm:gap-4 min-w-0">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={TESTIMONIALS[current].avatar}
                       alt={TESTIMONIALS[current].name}
-                      className="w-14 h-14 rounded-2xl object-cover ring-2 ring-purple-500/30"
+                      className="w-11 h-11 sm:w-14 sm:h-14 rounded-2xl object-cover ring-2 ring-purple-500/30 flex-shrink-0"
                     />
-                    <div>
-                      <div className="text-white font-bold text-lg">{TESTIMONIALS[current].name}</div>
-                      <div className="text-purple-300 text-sm">{TESTIMONIALS[current].role}</div>
-                      <div className="text-white/40 text-xs">{TESTIMONIALS[current].company}</div>
+                    <div className="min-w-0">
+                      <div className="text-white font-bold text-base sm:text-lg truncate">{TESTIMONIALS[current].name}</div>
+                      <div className="text-purple-300 text-xs sm:text-sm truncate">{TESTIMONIALS[current].role}</div>
+                      <div className="text-white/40 text-xs truncate">{TESTIMONIALS[current].company}</div>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <div className="text-white/30 text-xs mb-1">Property Type</div>
+                  <div className="flex sm:flex-col sm:text-right items-center sm:items-end gap-2 sm:gap-0 flex-shrink-0">
+                    <div className="text-white/30 text-xs">Property Type</div>
                     <div className="text-purple-400 text-sm font-semibold">{TESTIMONIALS[current].propertyType}</div>
                   </div>
                 </div>
 
                 {/* Navigation */}
-                <div className="flex items-center gap-3 mt-8 pt-8 border-t border-white/8">
-                  <button onClick={prev} className="p-2.5 rounded-xl border border-white/10 hover:bg-white/10 text-white/60 hover:text-white transition-all">
+                <div className="flex items-center gap-3 mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-white/8">
+                  <button onClick={prev} className="p-2 sm:p-2.5 rounded-xl border border-white/10 hover:bg-white/10 text-white/60 hover:text-white transition-all flex-shrink-0">
                     <ArrowLeft className="w-4 h-4" />
                   </button>
                   <div className="flex gap-1.5 flex-1 justify-center">
@@ -122,7 +122,7 @@ export function Testimonials() {
                         className={`h-1.5 rounded-full transition-all ${i === current ? 'w-8 bg-purple-500' : 'w-2 bg-white/20'}`} />
                     ))}
                   </div>
-                  <button onClick={next} className="p-2.5 rounded-xl border border-white/10 hover:bg-white/10 text-white/60 hover:text-white transition-all">
+                  <button onClick={next} className="p-2 sm:p-2.5 rounded-xl border border-white/10 hover:bg-white/10 text-white/60 hover:text-white transition-all flex-shrink-0">
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>

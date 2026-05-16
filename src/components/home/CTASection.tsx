@@ -114,19 +114,19 @@ export function CTASection() {
           transition={{ delay: 0.3, duration: 0.6 }}
           className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 px-5 sm:px-8 py-5 sm:py-6 rounded-2xl border border-white/8 bg-white/2"
         >
-          <p className="text-white/50 text-sm">
-            Africa&apos;s most trusted real estate platform — verified agents, transparent listings.
+          <p className="text-white/50 text-sm text-center sm:text-left">
+            Africa&apos;s most trusted real estate platform, verified agents, transparent listings.
           </p>
-          <div className="flex items-center gap-3 flex-shrink-0">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 w-full sm:w-auto sm:flex-shrink-0">
             <Link
               href="/properties"
-              className="px-6 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm transition-colors"
+              className="text-center whitespace-nowrap px-6 py-3 sm:py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm transition-colors"
             >
               Browse Properties
             </Link>
             <Link
               href="/list-property"
-              className="px-6 py-2.5 rounded-xl border border-white/15 hover:border-white/30 text-white/70 hover:text-white font-semibold text-sm transition-all"
+              className="text-center whitespace-nowrap px-6 py-3 sm:py-2.5 rounded-xl border border-white/15 hover:border-white/30 text-white/70 hover:text-white font-semibold text-sm transition-all"
             >
               List for Free
             </Link>

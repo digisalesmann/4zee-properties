@@ -47,17 +47,23 @@ body {
 
 /* Premium Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #7c3aed;
-  border-radius: 3px;
+  background: rgba(124, 58, 237, 0.25);
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #6d28d9;
+  background: rgba(124, 58, 237, 0.6);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(124, 58, 237, 0.25) transparent;
 }
 
 /* Selection */
@@ -239,17 +245,20 @@ input[type="checkbox"]:checked {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 @media (min-width: 768px) {
   .container-premium {
-    padding: 0 40px;
+    padding-left: 40px;
+    padding-right: 40px;
   }
 }
 
 @media (min-width: 1280px) {
   .container-premium {
-    padding: 0 60px;
+    padding-left: 60px;
+    padding-right: 60px;
   }
 }

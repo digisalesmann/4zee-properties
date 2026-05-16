@@ -100,26 +100,28 @@ function AgentCard({ agent, index }: { agent: typeof ALL_AGENTS[0]; index: numbe
       </div>
 
       {/* Actions */}
-      <div className="px-6 sm:px-7 pb-6 sm:pb-7 flex items-center gap-2.5">
-        <a
-          href={`tel:${agent.phone}`}
-          className="flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-gray-200 text-gray-700 hover:border-purple-300 hover:text-purple-700 text-sm font-semibold transition-all flex-shrink-0 whitespace-nowrap"
-        >
-          <Phone className="w-3.5 h-3.5" />
-          Call
-        </a>
-        <a
-          href={`https://wa.me/${agent.whatsapp}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-green-500 hover:bg-green-600 text-white text-sm font-semibold transition-colors flex-shrink-0 whitespace-nowrap"
-        >
-          <WhatsAppIcon className="w-3.5 h-3.5" />
-          WhatsApp
-        </a>
+      <div className="px-6 sm:px-7 pb-6 sm:pb-7 flex flex-col gap-2">
+        <div className="flex items-center gap-2">
+          <a
+            href={`tel:${agent.phone}`}
+            className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl border border-gray-200 text-gray-700 hover:border-purple-300 hover:text-purple-700 text-sm font-semibold transition-all"
+          >
+            <Phone className="w-3.5 h-3.5 flex-shrink-0" />
+            Call
+          </a>
+          <a
+            href={`https://wa.me/${agent.whatsapp}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-green-500 hover:bg-green-600 text-white text-sm font-semibold transition-colors"
+          >
+            <WhatsAppIcon className="w-3.5 h-3.5 flex-shrink-0" />
+            WhatsApp
+          </a>
+        </div>
         <Link
           href={`/agents/${agent.id}`}
-          className="flex items-center justify-center gap-1.5 ml-auto px-4 py-2.5 rounded-xl bg-purple-700 hover:bg-purple-600 text-white text-sm font-semibold transition-colors whitespace-nowrap"
+          className="flex items-center justify-center gap-1.5 w-full px-4 py-2.5 rounded-xl bg-purple-700 hover:bg-purple-600 text-white text-sm font-semibold transition-colors"
         >
           View Profile
           <ArrowRight className="w-3.5 h-3.5" />
@@ -185,23 +187,23 @@ export default function AgentsPage() {
 
         {/* Trust strip inside hero */}
         <div className="border-t border-white/8">
-          <div className="container-premium py-4">
-            <div className="-mx-6 overflow-x-auto scrollbar-hide">
-              <div className="px-6">
-                <div className="flex gap-px bg-white/8 rounded-xl overflow-hidden min-w-max">
-                  {[
-                    { icon: CheckCircle2, text: 'KYC Verified' },
-                    { icon: Award, text: 'Background Checked' },
-                    { icon: Star, text: 'Client Rated' },
-                    { icon: Globe, text: 'Multi-Country' },
-                    { icon: TrendingUp, text: 'Performance Tracked' },
-                  ].map((item) => (
-                    <div key={item.text} className="bg-white/5 flex items-center gap-2 py-3 px-5 text-white/50 text-xs font-medium whitespace-nowrap">
-                      <item.icon className="w-3.5 h-3.5 text-purple-400 flex-shrink-0" />
-                      {item.text}
-                    </div>
-                  ))}
-                </div>
+          <div className="relative">
+            {/* fade hint on right edge */}
+            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-[#0d0b1a] to-transparent z-10 md:hidden" />
+            <div className="overflow-x-auto scrollbar-hide py-4 px-4 sm:px-6 lg:px-10">
+              <div className="flex gap-px bg-white/8 rounded-xl overflow-hidden w-max md:w-full">
+                {[
+                  { icon: CheckCircle2, text: 'KYC Verified' },
+                  { icon: Award, text: 'Background Checked' },
+                  { icon: Star, text: 'Client Rated' },
+                  { icon: Globe, text: 'Multi-Country' },
+                  { icon: TrendingUp, text: 'Performance Tracked' },
+                ].map((item) => (
+                  <div key={item.text} className="bg-white/5 flex items-center gap-2 py-3 px-5 text-white/50 text-xs font-medium whitespace-nowrap flex-1 justify-center">
+                    <item.icon className="w-3.5 h-3.5 text-purple-400 flex-shrink-0" />
+                    {item.text}
+                  </div>
+                ))}
               </div>
             </div>
           </div>

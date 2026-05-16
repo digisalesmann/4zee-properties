@@ -63,42 +63,42 @@ export function PropertyCard({ property, variant = 'default', index = 0 }: Prope
         </button>
 
         {/* Bottom content */}
-        <div className="absolute bottom-0 left-0 right-0 p-8 z-10">
-          <div className="text-3xl font-bold text-white mb-3 font-display">
+        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8 z-10">
+          <div className="text-2xl sm:text-3xl font-bold text-white mb-2 sm:mb-3 font-display">
             {formatCurrency(property.price, property.currency)}
           </div>
           <Link href={`/properties/${property.id}`}>
-            <h3 className="font-display text-2xl font-bold text-white mb-2 hover:text-purple-300 transition-colors leading-snug">
+            <h3 className="font-display text-lg sm:text-2xl font-bold text-white mb-1.5 sm:mb-2 hover:text-purple-300 transition-colors leading-snug line-clamp-2">
               {property.title}
             </h3>
           </Link>
-          <div className="flex items-center gap-1.5 text-white/60 text-sm mb-5">
-            <MapPin className="w-4 h-4 text-purple-400 flex-shrink-0" />
-            {property.location.city}, {property.location.country}
+          <div className="flex items-center gap-1.5 text-white/60 text-sm mb-3 sm:mb-5">
+            <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-400 flex-shrink-0" />
+            <span className="truncate">{property.location.city}, {property.location.country}</span>
           </div>
-          <div className="flex items-center gap-5 text-white/60 text-sm mb-6 pb-6 border-b border-white/15">
+          <div className="flex items-center flex-wrap gap-x-3 gap-y-1.5 text-white/60 text-sm mb-4 sm:mb-6 pb-4 sm:pb-6 border-b border-white/15">
             {property.bedrooms && (
-              <span className="flex items-center gap-1.5"><Bed className="w-4 h-4 text-purple-400" />{property.bedrooms} Beds</span>
+              <span className="flex items-center gap-1.5 flex-shrink-0"><Bed className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-400" />{property.bedrooms} Beds</span>
             )}
             {property.bathrooms && (
-              <span className="flex items-center gap-1.5"><Bath className="w-4 h-4 text-purple-400" />{property.bathrooms} Baths</span>
+              <span className="flex items-center gap-1.5 flex-shrink-0"><Bath className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-400" />{property.bathrooms} Baths</span>
             )}
-            <span className="flex items-center gap-1.5"><Maximize className="w-4 h-4 text-purple-400" />{property.size} {property.sizeUnit}</span>
-            <span className="ml-auto flex items-center gap-1 text-white/40"><Eye className="w-3.5 h-3.5" />{property.views.toLocaleString()}</span>
+            <span className="flex items-center gap-1.5 flex-shrink-0"><Maximize className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-400" />{property.size} {property.sizeUnit}</span>
+            <span className="flex items-center gap-1 text-white/40 flex-shrink-0 ml-auto"><Eye className="w-3 h-3 sm:w-3.5 sm:h-3.5" />{property.views.toLocaleString()}</span>
           </div>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full overflow-hidden relative ring-2 ring-white/20 flex-shrink-0">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden relative ring-2 ring-white/20 flex-shrink-0">
                 <Image src={property.agent.avatar} alt={property.agent.name} fill sizes="40px" className="object-cover" />
               </div>
-              <div>
-                <div className="text-white font-semibold text-sm flex items-center gap-1">
-                  {property.agent.name}
-                  {property.agent.verified && <Verified className="w-3.5 h-3.5 text-purple-400" />}
+              <div className="min-w-0">
+                <div className="text-white font-semibold text-xs sm:text-sm flex items-center gap-1 min-w-0">
+                  <span className="truncate">{property.agent.name}</span>
+                  {property.agent.verified && <Verified className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-purple-400 flex-shrink-0" />}
                 </div>
                 <div className="flex items-center gap-0.5 text-amber-400 mt-0.5">
-                  <Star className="w-3 h-3 fill-current" />
-                  <span className="text-xs text-white/50 ml-0.5">{property.agent.rating} ({property.agent.reviews})</span>
+                  <Star className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current" />
+                  <span className="text-[10px] sm:text-xs text-white/50 ml-0.5">{property.agent.rating} ({property.agent.reviews})</span>
                 </div>
               </div>
             </div>
@@ -106,9 +106,9 @@ export function PropertyCard({ property, variant = 'default', index = 0 }: Prope
               href={`https://wa.me/${property.agent.whatsapp}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2.5 bg-green-500/90 hover:bg-green-500 text-white rounded-xl text-sm font-semibold transition-all"
+              className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-green-500/90 hover:bg-green-500 text-white rounded-xl text-xs sm:text-sm font-semibold transition-all flex-shrink-0 whitespace-nowrap"
             >
-              <WhatsAppIcon className="w-4 h-4" />
+              <WhatsAppIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               Chat
             </a>
           </div>
@@ -124,59 +124,63 @@ export function PropertyCard({ property, variant = 'default', index = 0 }: Prope
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: index * 0.05, duration: 0.4 }}
-        className="flex gap-6 bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-purple-200 hover:shadow-xl hover:shadow-purple-900/8 transition-all duration-300 group"
+        className="flex flex-col sm:flex-row bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-purple-200 hover:shadow-xl hover:shadow-purple-900/8 transition-all duration-300 group"
       >
-        <Link href={`/properties/${property.id}`} className="relative w-72 flex-shrink-0 overflow-hidden">
+        {/* Image */}
+        <Link href={`/properties/${property.id}`} className="relative h-52 sm:h-auto sm:w-56 sm:flex-shrink-0 overflow-hidden">
           <Image
             src={property.images[0]}
             alt={property.title}
             fill
-            sizes="288px"
+            sizes="(max-width: 640px) 100vw, 224px"
             className="object-cover group-hover:scale-105 transition-transform duration-500"
           />
-          <div className="absolute top-4 left-4 flex gap-2">
+          <div className="absolute top-3 left-3 flex gap-2 flex-wrap">
             <Badge variant={statusInfo.color}>{statusInfo.label}</Badge>
             {property.luxury && <Badge variant="gold">Luxury</Badge>}
           </div>
         </Link>
-        <div className="flex-1 p-6 flex flex-col justify-between">
+
+        {/* Content */}
+        <div className="flex-1 p-4 sm:p-6 flex flex-col justify-between min-w-0">
           <div>
-            <div className="flex items-start justify-between mb-2">
-              <Link href={`/properties/${property.id}`}>
-                <h3 className="text-xl font-bold text-gray-900 hover:text-purple-700 transition-colors line-clamp-1">{property.title}</h3>
+            <div className="flex items-start justify-between gap-2 mb-1.5">
+              <Link href={`/properties/${property.id}`} className="min-w-0">
+                <h3 className="text-base sm:text-xl font-bold text-gray-900 hover:text-purple-700 transition-colors line-clamp-1">{property.title}</h3>
               </Link>
-              <button onClick={() => setSaved(!saved)} className="ml-4 p-2 rounded-xl hover:bg-purple-50 transition-colors">
-                <Heart className={cn('w-5 h-5 transition-colors', saved ? 'fill-red-500 text-red-500' : 'text-gray-400')} />
+              <button onClick={() => setSaved(!saved)} className="flex-shrink-0 p-2 rounded-xl hover:bg-purple-50 transition-colors">
+                <Heart className={cn('w-4 h-4 sm:w-5 sm:h-5 transition-colors', saved ? 'fill-red-500 text-red-500' : 'text-gray-400')} />
               </button>
             </div>
-            <div className="flex items-center gap-1 text-gray-500 text-sm mb-3">
-              <MapPin className="w-4 h-4 text-purple-500" />
-              <span>{property.location.city}, {property.location.country}</span>
+            <div className="flex items-center gap-1 text-gray-500 text-sm mb-2 sm:mb-3">
+              <MapPin className="w-3.5 h-3.5 text-purple-500 flex-shrink-0" />
+              <span className="truncate">{property.location.city}, {property.location.country}</span>
             </div>
-            <p className="text-gray-500 text-sm line-clamp-2 mb-4">{property.description}</p>
-            <div className="flex items-center gap-6 text-sm text-gray-600">
+            <p className="text-gray-500 text-xs sm:text-sm line-clamp-2 mb-3 sm:mb-4 hidden sm:block">{property.description}</p>
+            <div className="flex items-center flex-wrap gap-x-3 gap-y-1 text-sm text-gray-600">
               {property.bedrooms && (
-                <span className="flex items-center gap-1.5"><Bed className="w-4 h-4 text-purple-400" />{property.bedrooms} Beds</span>
+                <span className="flex items-center gap-1"><Bed className="w-3.5 h-3.5 text-purple-400" />{property.bedrooms} Beds</span>
               )}
               {property.bathrooms && (
-                <span className="flex items-center gap-1.5"><Bath className="w-4 h-4 text-purple-400" />{property.bathrooms} Baths</span>
+                <span className="flex items-center gap-1"><Bath className="w-3.5 h-3.5 text-purple-400" />{property.bathrooms} Baths</span>
               )}
-              <span className="flex items-center gap-1.5"><Maximize className="w-4 h-4 text-purple-400" />{property.size} {property.sizeUnit}</span>
-              <span className="flex items-center gap-1 text-gray-400 ml-auto"><Eye className="w-4 h-4" />{property.views.toLocaleString()}</span>
+              <span className="flex items-center gap-1"><Maximize className="w-3.5 h-3.5 text-purple-400" />{property.size} {property.sizeUnit}</span>
+              <span className="flex items-center gap-1 text-gray-400 ml-auto"><Eye className="w-3.5 h-3.5" />{property.views.toLocaleString()}</span>
             </div>
           </div>
-          <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+
+          <div className="flex items-center justify-between pt-3 sm:pt-4 mt-3 sm:mt-0 border-t border-gray-100">
             <div>
-              <div className="text-2xl font-bold text-purple-700">{formatCurrency(property.price, property.currency)}</div>
+              <div className="text-lg sm:text-2xl font-bold text-purple-700">{formatCurrency(property.price, property.currency)}</div>
               {property.status === 'for-rent' && <div className="text-xs text-gray-500">per month</div>}
             </div>
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full overflow-hidden relative">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden relative flex-shrink-0">
                   <Image src={property.agent.avatar} alt={property.agent.name} fill sizes="32px" className="object-cover" />
                 </div>
-                <div>
-                  <div className="text-xs font-semibold text-gray-800">{property.agent.name}</div>
+                <div className="hidden sm:block">
+                  <div className="text-xs font-semibold text-gray-800 whitespace-nowrap">{property.agent.name}</div>
                   <div className="flex items-center gap-0.5 text-amber-500">
                     <Star className="w-3 h-3 fill-current" />
                     <span className="text-xs font-medium">{property.agent.rating}</span>
@@ -184,7 +188,7 @@ export function PropertyCard({ property, variant = 'default', index = 0 }: Prope
                 </div>
               </div>
               <a href={`https://wa.me/${property.agent.whatsapp}`} target="_blank" rel="noopener noreferrer"
-                className="p-2 bg-green-500 text-white rounded-xl hover:bg-green-600 transition-colors">
+                className="p-2 bg-green-500 text-white rounded-xl hover:bg-green-600 transition-colors flex-shrink-0">
                 <WhatsAppIcon className="w-4 h-4" />
               </a>
             </div>

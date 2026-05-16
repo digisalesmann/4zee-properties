@@ -173,7 +173,7 @@ export default function ConstructionPage() {
               </h2>
             </div>
             <p className="text-white/45 text-base max-w-sm leading-relaxed lg:text-right">
-              Every specialist you need — all KYC-verified and rated by past clients across Africa.
+              Every specialist you need, all KYC-verified and rated by past clients across Africa.
             </p>
           </motion.div>
 

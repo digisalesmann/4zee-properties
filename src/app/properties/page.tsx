@@ -234,24 +234,19 @@ export default function PropertiesPage() {
         )}
 
         {/* Sort & View controls */}
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-2">
-            <span className="text-gray-500 text-sm">
-              Showing <span className="font-bold text-gray-900">{filtered.length}</span> properties
-            </span>
-          </div>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 mb-8">
+          <span className="text-gray-500 text-sm whitespace-nowrap">
+            Showing <span className="font-bold text-gray-900">{filtered.length}</span> properties
+          </span>
 
-          <div className="flex items-center gap-3">
-            {/* Sort */}
+          <div className="flex items-center gap-2 sm:gap-3">
             <Select
               value={sortBy}
               onChange={setSortBy}
               options={SORT_OPTIONS}
-              className="w-44"
+              className="flex-1 sm:flex-none sm:w-44"
             />
-
-            {/* View toggle */}
-            <div className="flex items-center bg-white border border-gray-200 rounded-xl p-1">
+            <div className="flex items-center bg-white border border-gray-200 rounded-xl p-1 flex-shrink-0">
               <button
                 onClick={() => setViewMode('grid')}
                 className={`p-2 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-purple-600 text-white shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}

@@ -24,7 +24,7 @@ const EXTRA_PROJECTS = [
     status: 'Phase 2 Active',
     completion: '2030',
     image: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80',
-    description: "Kenya's Silicon Savannah — a world-class technology hub 60km from Nairobi.",
+    description: "Kenya's Silicon Savannah, a world-class technology hub 60km from Nairobi.",
   },
   {
     id: 'inf-006',
@@ -36,7 +36,7 @@ const EXTRA_PROJECTS = [
     status: 'Active Development',
     completion: '2029',
     image: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&q=80',
-    description: "West Africa's first truly integrated smart city — housing, retail, tech, and green spaces.",
+    description: "West Africa's first truly integrated smart city, housing, retail, tech, and green spaces.",
   },
   {
     id: 'inf-007',

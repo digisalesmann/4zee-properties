@@ -507,7 +507,7 @@ export default function InvestPage() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="flex flex-col sm:flex-row items-center justify-between gap-6 px-6 sm:px-10 py-8 rounded-2xl border border-white/8 bg-white/2"
+            className="flex flex-col items-start gap-6 px-6 sm:px-10 py-8 rounded-2xl border border-white/8 bg-white/2 sm:flex-row sm:items-center sm:justify-between"
           >
             <div>
               <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
@@ -515,16 +515,16 @@ export default function InvestPage() {
               </h2>
               <p className="text-white/40 text-sm">Join 12,000+ investors already building wealth through 4zee Properties.</p>
             </div>
-            <div className="flex items-center gap-3 flex-shrink-0">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 w-full sm:w-auto sm:flex-shrink-0">
               <Link
                 href="/properties?status=for-sale"
-                className="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm transition-colors whitespace-nowrap"
+                className="text-center px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm transition-colors whitespace-nowrap"
               >
                 Browse Properties
               </Link>
               <Link
                 href="/agents"
-                className="px-6 py-3 rounded-xl border border-white/15 hover:border-white/30 text-white/70 hover:text-white font-semibold text-sm transition-all whitespace-nowrap"
+                className="text-center px-6 py-3 rounded-xl border border-white/15 hover:border-white/30 text-white/70 hover:text-white font-semibold text-sm transition-all whitespace-nowrap"
               >
                 Talk to Advisor
               </Link>

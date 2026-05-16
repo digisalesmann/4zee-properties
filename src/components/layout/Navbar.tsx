@@ -62,6 +62,7 @@ const NAV_ITEMS = [
       { label: 'Investment Guide', href: '/invest', desc: 'Market intelligence' },
       { label: 'ROI Calculator', href: '/invest#calculator', desc: 'Estimate returns' },
       { label: 'Market Trends', href: '/markets', desc: 'Real-time data' },
+      { label: 'About 4zee', href: '/about', desc: 'Our story & team' },
     ],
   },
 ];
@@ -217,7 +218,7 @@ export function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed top-0 right-0 bottom-0 z-50 w-full sm:w-[360px] bg-[#0d0b1a] flex flex-col lg:hidden overflow-y-auto"
+              className="fixed top-0 right-0 bottom-0 z-50 w-full sm:w-[360px] bg-[#0d0b1a] flex flex-col lg:hidden overflow-y-auto scrollbar-hide"
             >
               {/* Header */}
               <div className="flex items-center justify-between px-6 pt-6 pb-5 border-b border-white/8">

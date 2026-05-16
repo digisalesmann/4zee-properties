@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { ChevronDown, Check } from 'lucide-react';
 
 interface Option {
@@ -16,10 +17,38 @@ interface SelectProps {
   className?: string;
 }
 
+interface DropdownRect { top: number; left: number; width: number; }
+
+function useDropdownRect(ref: React.RefObject<HTMLDivElement | null>, open: boolean) {
+  const [rect, setRect] = useState<DropdownRect | null>(null);
+
+  const update = useCallback(() => {
+    if (ref.current) {
+      const r = ref.current.getBoundingClientRect();
+      setRect({ top: r.bottom + window.scrollY + 6, left: r.left + window.scrollX, width: r.width });
+    }
+  }, [ref]);
+
+  useEffect(() => {
+    if (open) {
+      update();
+      window.addEventListener('scroll', update, true);
+      window.addEventListener('resize', update);
+      return () => {
+        window.removeEventListener('scroll', update, true);
+        window.removeEventListener('resize', update);
+      };
+    }
+  }, [open, update]);
+
+  return rect;
+}
+
 export function Select({ value, onChange, options, placeholder = 'Select...', className = '' }: SelectProps) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const selected = options.find(o => o.value === value);
+  const rect = useDropdownRect(ref, open);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -42,8 +71,11 @@ export function Select({ value, onChange, options, placeholder = 'Select...', cl
         <ChevronDown className={`w-4 h-4 text-gray-400 flex-shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
       </button>
 
-      {open && (
-        <div className="absolute top-full left-0 right-0 mt-1.5 bg-white border border-gray-100 rounded-xl shadow-xl shadow-gray-900/10 z-50 overflow-hidden max-h-56 overflow-y-auto">
+      {open && rect && createPortal(
+        <div
+          style={{ position: 'absolute', top: rect.top, left: rect.left, width: rect.width, zIndex: 9999 }}
+          className="bg-white border border-gray-100 rounded-xl shadow-xl shadow-gray-900/10 max-h-60 overflow-y-auto scrollbar-hide"
+        >
           {options.map(opt => (
             <button
               key={opt.value}
@@ -59,7 +91,8 @@ export function Select({ value, onChange, options, placeholder = 'Select...', cl
               {opt.value === value && <Check className="w-3.5 h-3.5 text-purple-600 flex-shrink-0" />}
             </button>
           ))}
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
@@ -70,6 +103,7 @@ export function DarkSelect({ value, onChange, options, placeholder = 'Select...'
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const selected = options.find(o => o.value === value);
+  const rect = useDropdownRect(ref, open);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -92,8 +126,11 @@ export function DarkSelect({ value, onChange, options, placeholder = 'Select...'
         <ChevronDown className={`w-4 h-4 text-white/40 flex-shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
       </button>
 
-      {open && (
-        <div className="absolute top-full left-0 right-0 mt-1.5 bg-[#1e1a3a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 z-50 overflow-hidden max-h-56 overflow-y-auto">
+      {open && rect && createPortal(
+        <div
+          style={{ position: 'absolute', top: rect.top, left: rect.left, width: rect.width, zIndex: 9999 }}
+          className="bg-[#1e1a3a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 max-h-60 overflow-y-auto scrollbar-hide"
+        >
           {options.map(opt => (
             <button
               key={opt.value}
@@ -109,7 +146,8 @@ export function DarkSelect({ value, onChange, options, placeholder = 'Select...'
               {opt.value === value && <Check className="w-3.5 h-3.5 text-purple-400 flex-shrink-0" />}
             </button>
           ))}
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

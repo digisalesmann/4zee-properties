@@ -72,7 +72,7 @@ export function Hero() {
             <span className="gradient-text">in Real Estate</span>
           </h1>
           <p className="text-white/60 text-base md:text-lg font-light mt-5 max-w-xl leading-relaxed">
-            Premium properties across 28 African countries — AI-powered, verified, and ready to invest.
+            Premium properties across 28 African countries. AI-powered, verified, and ready to invest.
           </p>
         </motion.div>
 
@@ -194,16 +194,7 @@ export function Hero() {
         </div>
       </motion.div>
 
-      {/* Scroll hint */}
-      <motion.div
-        animate={{ y: [0, 6, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-20 left-1/2 -translate-x-1/2 z-10 opacity-30"
-      >
-        <div className="w-5 h-8 rounded-full border border-white/50 flex items-start justify-center pt-1.5">
-          <div className="w-1 h-2 bg-white rounded-full" />
-        </div>
-      </motion.div>
+
     </section>
   );
 }
